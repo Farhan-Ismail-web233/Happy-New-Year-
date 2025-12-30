@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 2026 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Baloo+2:wght@700&family=Allura&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ffd6e8,#ffb3d9);
+    overflow:hidden;
+}
+
+/* hearts texture */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:radial-gradient(white 1.5px,transparent 1.5px);
+    background-size:38px 38px;
+    opacity:.25;
+    z-index:0;
+}
+
+/* pages */
+.page{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+.page.active{display:flex}
+
+/* card */
+.card{
+    background:rgba(255,255,255,.2);
+    backdrop-filter:blur(12px);
+    padding:50px 40px;
+    border-radius:32px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(0,0,0,.3);
+    position:relative;
+    z-index:10;
+}
+
+.decor-hearts{font-size:26px}
+.wish-you{
+    font-family:'Great Vibes',cursive;
+    font-size:26px;
+    color:#c2185b;
+}
+.happy{
+    font-family:'Baloo 2',cursive;
+    font-size:66px;
+    line-height:1;
+    color:white;
+    text-shadow:2px 2px 0 #ff80ab,4px 4px 18px rgba(0,0,0,.45);
+}
+.cutie{
+    font-family:'Great Vibes',cursive;
+    font-size:26px;
+    color:#c2185b;
+}
+
+button{
+    margin-top:32px;
+    padding:14px 46px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ff4f9a,#c2185b);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* ===== SPLASH ===== */
+.particle{
+    position:fixed;
+    width:10px;
+    height:14px;
+    z-index:9999;
+    animation:blast 2.4s ease-out forwards;
+}
+
+@keyframes blast{
+    0%{
+        transform:translate(0,0) rotate(0deg);
+        opacity:1;
+    }
+    100%{
+        transform:translate(var(--x),var(--y)) rotate(720deg);
+        opacity:0;
+    }
+}
+
+/* floating hearts */
+.float-heart{
+    position:fixed;
+    font-size:16px;
+    opacity:.6;
+    animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+    from{transform:translateY(100vh);opacity:0}
+    to{transform:translateY(-10vh);opacity:1}
+}
+
+/* ===== LETTER ===== */
+.vintage-paper{
+    position:relative;
+    background:linear-gradient(#ead3a1,#d4b07a);
+    padding:42px 38px 85px;
+    max-width:520px;
+    border-radius:6px;
+    font-family:'Allura',cursive;
+    font-size:21px;
+    line-height:1.55;
+    color:#4b2e1a;
+    box-shadow:
+      inset 0 0 35px rgba(0,0,0,.25),
+      0 30px 60px rgba(0,0,0,.45);
+}
+
+/* stains */
+.vintage-paper::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(0,0,0,.15) 1px,transparent 1px);
+    background-size:22px 22px;
+    opacity:.25;
+}
+
+/* bottom-right thumb heart */
+.thumb-heart{
+    position:absolute;
+    bottom:8px;
+    right:8px;
+    font-size:48px;
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+  <source src="romantic.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div class="card">
+    <div class="decor-hearts">💗 💕 💖</div>
+    <div class="wish-you">Wish You</div>
+    <div class="happy">Happy New Year<br>2026</div>
+    <div class="cutie">Cutie</div>
+    <button onclick="goNext()">Next page</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div class="vintage-paper">
+  <br><br>
+   "Aapko Naya Saal Mubarak ho, meri Cutie! Har naye saal ka pehla pal hum dono saath hi manayenge. Har khushi, har muskaan aur har sapna hum milkar jeeyenge. Har saal humari mohabbat aur gehri hoti rahegi, aur humesha ek doosre ke saath rahenge. Aap meri zindagi ka sabse khoobsurat hissa ho, aur is naye saal mein meri dua hai ke humari mohabbat aur bhi mazboot ho jaye."
+    <br><br>
+    "Teri baaton ka jaadu hamesha mujh par rahe,
+Naye saal mein sirf humari mohabbat gehri rahe."
+    <br><br>
+    Forever yours Cutie 💖
+    <div class="thumb-heart">💗</div>
+  </div>
+</div>
+
+<script>
+/* SPLASH */
+window.onload=()=>{
+  blast("left");
+  blast("right");
+  floatingHearts();
+};
+
+function blast(side){
+  for(let i=0;i<60;i++){
+    const p=document.createElement("div");
+    p.className="particle";
+    p.style.background=["#ff4f9a","#ffd1e8","#ffffff","#ff80ab"]
+      [Math.floor(Math.random()*4)];
+
+    p.style.left=side==="left"
+      ? Math.random()*120+"px"
+      : window.innerWidth-Math.random()*120+"px";
+
+    p.style.bottom="0";
+    p.style.setProperty("--x",(Math.random()*400-200)+"px");
+    p.style.setProperty("--y",(-Math.random()*520-120)+"px");
+
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),2400);
+  }
+}
+
+function floatingHearts(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="float-heart";
+    h.innerHTML="💗";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=6+Math.random()*4+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),10000);
+  },500);
+}
+
+function goNext(){
+  page1.classList.remove("active");
+  page2.classList.add("active");
+}
+</script>
+
+</body>
+</html>
